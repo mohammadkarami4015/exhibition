@@ -13,12 +13,10 @@ use Modules\Exibition\Http\Requests\BoothRequest;
 
 class BoothController extends AdminController
 {
-
         public function __construct()
     {
         $this->middleware('auth');
     }
-        
 
     /**
      * Display a listing of the resource.
@@ -35,7 +33,19 @@ class BoothController extends AdminController
     public function index()
     {
        try{
-           $booths=Booth::latest()->paginate(20);
+           $booths=Booth::all();
+
+           foreach ($booths as $booth){
+               if ($booth['confrim_order']==0) {
+                   if ($booth->timeout($booth['time_order'])) {
+                       $booth['reserved'] = 0;
+                       $booth['time_order'] = null;
+                       $booth['order_info'] = null;
+                       $booth['user_id'] = 0;
+                       $booth->save();
+                   }
+               }
+           }
            return view('exibition::panel.booth.index',compact('booths'));
        }
        catch (Exception $e){}
@@ -129,4 +139,25 @@ class BoothController extends AdminController
         $booth->delete();
         return redirect(route('booth.index'));
     }
+
+    public function confrim(Booth $booth)
+    {
+        if ($booth['reserved'] == 1){
+            $booth['confrim_order'] = 1;
+            $booth->save();
+        }
+        return redirect()->back();
+
+    }
+    public function unconfrim(Booth $booth)
+    {
+        $booth['confrim_order'] = 0;
+        $booth['order_info'] = null;
+        $booth['user_id'] = 0;
+        $booth['reserved']= 0;
+        $booth['time_order']=null;
+        $booth->save();
+        return redirect()->back();
+    }
+
 }

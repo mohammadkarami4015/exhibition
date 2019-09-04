@@ -40,8 +40,9 @@
                             <th>توضیحات</th>
                             <th>مساحت</th>
                             <th>مربوط به نمایشگاه</th>
+                            <th>تایید رزرو</th>
                             <th>وضعیت</th>
-                            <th>رزور شده توسط</th>
+                            <th>مشخصات سفارش دهنده</th>
                             <th>تنظیمات</th>
                         </tr>
                         </thead>
@@ -53,15 +54,26 @@
                                 <td>{{$value->detail}}</td>
                                 <td>{{$value->area}}</td>
                                 <td>{{$value->exibition['title']}}</td>
-                                <td>
-                                    @if($value->reserved==true)
-                                        رزرو شده
+                                <td>@if($value->confrim_order == true )
+                                        <a href="{{route('unconfrim_reserve',['id'=>$value->id])}}"><button class="btn btn-primary">تایید شده</button></a>
                                         @else
-                                    آزاد
+                                        <a  href="{{route('confrim_reserve',['id'=>$value->id])}}"><button class="btn btn-danger" >تایید نشده</button></a>
                                         @endif
+
+                                </td>
+                                <td>
+                                    @if($value->reserved==true && $value->confrim_order==true)
+                                        <p class="btn-sm btn-default">رزرو شده</p>
+                                        @elseif($value->reserved==true)
+                                        <p class="btn-sm btn-primary">سفارش داده شده</p>
+                                        @else
+                                            <p class="btn-sm btn-danger">آزاد</p>
+                                        @endif
+
                                 </td>
                                 <td> @if($value->reserved==true)
                                         {{$value->user['name']}}
+                                        {{ $value->order_info}}
                                     @endif
                                 </td>
                                 <td>

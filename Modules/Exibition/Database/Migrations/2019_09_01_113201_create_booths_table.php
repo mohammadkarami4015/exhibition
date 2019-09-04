@@ -28,8 +28,11 @@ class CreateBoothsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->string('image')->nullable();
+            $table->boolean('confrim_order')->default(false);
+            $table->text('order_info')->nullable();
             $table->boolean('reserved')->default(false);
             $table->integer('area')->default(0);
+            $table->timestamp('time_order')->nullable();
             $table->timestamps();
         });
     }
