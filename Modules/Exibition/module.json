@@ -1,0 +1,14 @@
+{
+    "name": "Exibition",
+    "alias": "exibition",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Exibition\\Providers\\ExibitionServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
