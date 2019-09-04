@@ -12,6 +12,8 @@
 
     <form method="post" action="{{route('booth.store')}}"   enctype="multipart/form-data" class="form-horizontal">
         {{csrf_field()}}
+
+        <input  name="exibition_id" value="{{$exibition->id}}"  readonly>
         <div class="hr-line-dashed"></div>
         <div class="form-group"><label class="col-sm-2 control-label">عنوان غرفه</label>
             <div class="col-sm-6">
@@ -23,15 +25,15 @@
                 <input type="text" name="detail" placeholder="توضیحات غرفه را وارد کنید" class="form-control input-lg m-b">
             </div>
         </div>
-        <div class="form-group"><label class="col-sm-2 control-label">مربوط به نمایشگاه</label>
-            <div class="col-sm-6">
-                <select name="exibition_id" id="">
-                    @foreach($exibitions as $value)
-                        <option value="{{$value->id}}">{{$value->title}}</option>
-                        @endforeach
-                </select>
-            </div>
-        </div>
+        {{--<div class="form-group"><label class="col-sm-2 control-label">مربوط به نمایشگاه</label>--}}
+            {{--<div class="col-sm-6">--}}
+                {{--<select name="exibition_id" id="">--}}
+                    {{--@foreach($exibitions as $value)--}}
+                        {{--<option value="{{$value->id}}">{{$value->title}}</option>--}}
+                        {{--@endforeach--}}
+                {{--</select>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <div class="form-group"><label class="col-sm-2 control-label">وضعیت غرفه</label>
             <div class="col-sm-10">
                 <div class="row">

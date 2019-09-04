@@ -23,7 +23,7 @@ Route::namespace('panel')->prefix('/panel')->middleware('auth','checkAdmin')->gr
 //   ---------------------------booth route--------------------------------
 
     Route::get('/booth','BoothController@index')->name('booth.index');
-    Route::get('/booth/create','BoothController@create')->name('booth.create');
+    Route::get('/booth/create/{exibition}','BoothController@create')->name('booth.create');
     Route::get('/booth/{booth}','BoothController@show')->name('booth.show');
     Route::get('/booth/edit/{booth}','BoothController@edit')->name('booth.edit');
     Route::delete('/booth/{booth}','BoothController@destroy')->name('booth.destroy');

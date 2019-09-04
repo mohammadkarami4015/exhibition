@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 @section('content')
-    <button class="btn btn-primary">افزودن غرفه</button>
+    <a  href="{{route('booth.create',['id'=>$exibition->id])}}"><button class="btn btn-primary">افزودن غرفه</button></a>
     <div style="text-align: center;">
         <h3>{{$exibition->title}}</h3>
     </div>

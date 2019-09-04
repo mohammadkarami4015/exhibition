@@ -18,7 +18,6 @@ class BoothRequest extends FormRequest
                 'title'=>'required|max:250',
                 'detail'=>'required',
                 'area'=>'required|integer',
-                'exibition_id'=>'required',
                 'image'=>'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ];
         }
@@ -26,7 +25,7 @@ class BoothRequest extends FormRequest
             'title'=>'required|max:250',
             'detail'=>'required',
             'area'=>'required|integer',
-            'exibition_id'=>'required|integer',
+
 
         ];
 

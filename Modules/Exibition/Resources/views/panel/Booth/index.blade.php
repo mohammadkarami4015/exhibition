@@ -5,7 +5,6 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <a href="{{route('booth.create')}}" class="btn btn-primary">افزودن غرفه</a>
                 <a href="{{route('exibition.index')}}" class="btn btn-primary">نمایشگاه ها</a>
             </div>
             <div class="ibox-content">

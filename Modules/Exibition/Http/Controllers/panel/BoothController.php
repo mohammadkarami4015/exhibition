@@ -35,6 +35,7 @@ class BoothController extends AdminController
        try{
            $booths=Booth::all();
 
+//unreserve after 24h
            foreach ($booths as $booth){
                if ($booth['confrim_order']==0) {
                    if ($booth->timeout($booth['time_order'])) {
@@ -55,11 +56,11 @@ class BoothController extends AdminController
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
+    public function create(Exibition $exibition)
     {
         try{
-            $exibitions=Exibition::all();
-            return view('exibition::panel.booth.create',compact('exibitions'));
+//            $exibitions=Exibition::all();
+            return view('exibition::panel.booth.create',compact('exibition'));
         }
         catch (Exception $e){}
     }
