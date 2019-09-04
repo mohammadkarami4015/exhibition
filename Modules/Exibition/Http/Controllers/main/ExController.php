@@ -2,6 +2,7 @@
 
 namespace Modules\Exibition\Http\Controllers\main;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -78,10 +79,19 @@ class ExController extends Controller
     public function reserve(Booth $booth)
     {
         try{
-            $booth['reserved']=1;
-            $booth['user_id']=Auth::user()->id;
-            $booth->save();
-            return $booth;
+            if (\auth()->check()) {
+                $booth['reserved'] = 1;
+                $booth['time_order'] = Carbon::now();
+                $booth['user_id'] = Auth::user()->id;
+                $booth->save();
+                return redirect()->back();
+            }else{
+                $booth['reserved'] = 1;
+                $booth['time_order'] = Carbon::now();
+                $booth['order_info'] = \request('order_info');
+                $booth->save();
+                return redirect()->back();
+            }
         }
         catch (Exception $e)
         {

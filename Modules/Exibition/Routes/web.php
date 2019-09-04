@@ -11,7 +11,7 @@
 |
 */
 
-Route::namespace('panel')->prefix('/panel')->middleware('auth')->group(function() {
+Route::namespace('panel')->prefix('/panel')->middleware('auth','checkAdmin')->group(function() {
    Route::get('/exibition','ExibitionController@index')->name('exibition.index');
    Route::get('/exibition/create','ExibitionController@create')->name('exibition.create');
    Route::post('/exibition','ExibitionController@store')->name('exibition.store');
@@ -30,8 +30,10 @@ Route::namespace('panel')->prefix('/panel')->middleware('auth')->group(function(
     Route::post('/booth/','BoothController@store')->name('booth.store');
     Route::patch('booth/update/{booth}','BoothController@update')->name('booth.update');
     Route::get('/search1','BoothController@search');
+    Route::get('/confrim/{booth}','BoothController@confrim')->name('confrim_reserve');
+    Route::get('/unconfrim/{booth}','BoothController@unconfrim')->name('unconfrim_reserve');;
 });
-Route::namespace('main')->prefix('main')->middleware('auth')->group(function(){
+Route::namespace('main')->prefix('main')->group(function(){
     Route::get('/','ExController@index');
     Route::get('/search','ExController@search');
     Route::get('/{exibition}','ExController@show')->name('show.ex');

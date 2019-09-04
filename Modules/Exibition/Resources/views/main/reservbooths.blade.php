@@ -29,7 +29,14 @@
         <h4>مساحت غرفه{{$value->area}}</h4>
         <br>
         @if($value->reserved == 0)
-            <a href=/main/reservebooth/{{$value->id}}"><button style="background: green; height: 40px;" >رزرو غرفه</button></a>
+            @if(auth()->check())
+                <a href="/main/reservebooth/{{$value->id}}"><button style="background: green; height: 40px;" >رزرو غرفه</button><a/>
+            @else
+                 <form action="/main/reservebooth/{{$value->id}}">
+                     <input type="text" name="order_info">
+                     <button type="submit" style="background: green; height: 40px;">رزرو غرفه</button>
+                 </form>
+            @endif
 
             @else
                 <h3>این غرفه رزرو شده</h3>
