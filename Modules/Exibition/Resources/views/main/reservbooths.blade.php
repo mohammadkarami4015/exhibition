@@ -20,6 +20,13 @@
     }
 
 </style>
+@if(count($errors)>0)
+    @foreach($errors->all() as $error)
+        <div class="alert alert-danger">{{$error}}</div>
+
+    @endforeach
+@endif
+
 @foreach($booths as $value)
     <div class="ex">
         <img height="250px" width="250px" src=" {{$value->image}}">

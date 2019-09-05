@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use http\Exception;
+use Illuminate\Validation\Validator;
 use Modules\Exibition\Entities\Booth;
 use Modules\Exibition\Entities\Exibition;
 
@@ -56,6 +57,7 @@ class ExController extends Controller
      */
     public function store(Request $request)
     {
+
         //
     }
 
@@ -86,6 +88,13 @@ class ExController extends Controller
                 $booth->save();
                 return redirect()->back();
             }else{
+                    $validator = \validator()->make(\request()->all(),[
+                        'order_info'=>'required'
+                    ]);
+                    if($validator->fails()){
+                        return redirect()->back()->withErrors($validator);
+                    }
+
                 $booth['reserved'] = 1;
                 $booth['time_order'] = Carbon::now();
                 $booth['order_info'] = \request('order_info');
@@ -130,4 +139,8 @@ class ExController extends Controller
     {
         //
     }
+
+
+
+
 }
